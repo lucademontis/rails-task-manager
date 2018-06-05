@@ -1,0 +1,39 @@
+<div class="container">
+  <h1> Shit to do: </h1>
+  <button>
+    <%= link_to 'Add new task', 'tasks/new' %>
+  </button>
+  <% @tasks.each do |task| %>
+      <% if task.completed %>
+        <div class="task">
+          <div class="row">
+            <i class="far fa-check-square"></i>
+            <%= link_to task.title, task_path(task) %>
+          </div>
+         <div class="poubelle">
+          <%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, task_path(task),
+           method: :delete,
+           data: { confirm: "Are you sure?" } %>
+          </div>
+        </div>
+      <% else %>
+        <div class="task">
+          <div class="row">
+            <i class="far fa-square"></i>
+            <%= link_to task.title, task_path(task) %>
+          </div>
+          <div class="poubelle">
+            <%= link_to '<i class="far fa-trash-alt"></i>'.html_safe, task_path(task),
+            method: :delete,
+            data: { confirm: "Are you sure?" } %>
+          </div>
+        </div>
+      <% end %>
+  <% end %>
+
+</div>
+
+
+
+<!-- render simplifies the code above. removed the each do, but simply putting what's below. After we need a partial file "_task.html.erb" where we paste the whole <ul> -->
+<%#= render @tasks %>
